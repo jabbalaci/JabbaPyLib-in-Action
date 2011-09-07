@@ -3,7 +3,7 @@
 	<name>JabbaPyLib-in-Action</name>
 	<comment></comment>
 	<projects>
-		<project>lib</project>
+		<project>jabbapylib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
