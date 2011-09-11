@@ -106,7 +106,7 @@ class HtmlWriter:
 def main():
     countries = Countries()
     
-    text = web.get_page_with_cookies(URL)
+    text = web.get_page_with_cookies_using_cookiejar(URL)
     soup = BeautifulSoup(text)
     for tag in soup.findAll('a', href=True):
         if 'country=' in tag['href']:
