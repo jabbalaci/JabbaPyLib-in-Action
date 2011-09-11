@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 
 """
-For test purposes.
+This produced a result that was usable in 95%.
+I had to refine the end result (population.py) by hand.
+
+Since this extractor might come in handy in the future, I kept it.
 """
 
 import re
@@ -48,7 +51,7 @@ def main():
                 #print country,':',population
                 countries.add(country, population)
                 
-    countries.sort()
+    #countries.sort()
     
     d = {}
     for country in countries.countries:

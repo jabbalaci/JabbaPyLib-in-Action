@@ -1,6 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: latin-1 -*-
 
+"""
+This data file contains countries and their population.
+I plan to use it for the stat. page of Project Euler
+(http://projecteuler.net/index.php?section=statistics).
+Since some countries appear on PE under a different name,
+I had to refine this list by hand. Modifications are marked
+in comments.
+"""
+
 countries_and_population = {
 # in comments: as you find it on
 # https://secure.wikimedia.org/wikipedia/en/wiki/List_of_countries_by_population
@@ -9,7 +18,7 @@ countries_and_population = {
     "Algeria": 36300000,
     "Andorra": 84082,
     "Angola": 19082000,
-    "Antigua": 89000,           # Antigua and Barbuda
+    "Antigua": 89000,               # Antigua and Barbuda
     "Argentina": 40091359,
     "Armenia": 3264500,
     "Australia": 22703239,
@@ -26,7 +35,7 @@ countries_and_population = {
     "Bermuda": 64566,
     "Bhutan": 695822,
     "Bolivia": 10426154,
-    "Bosnia": 3843126,          # Bosnia and Herzegovina
+    "Bosnia": 3843126,              # Bosnia and Herzegovina
     "Botswana": 1800098,
     "Brazil": 190732694,
     "Brunei": 399000,
@@ -42,12 +51,12 @@ countries_and_population = {
     "Chad": 11227000,
     "Chile": 17279100,
     "China": 1339724852,
-    "Christmas Island": 1508,   # in a footnote
+    "Christmas Island": 1508,       # in a footnote
     "Colombia": 46150000,
     "Comoros": 735000,
-    "Congo": 4043000,          # Republic of the Congo
+    "Congo": 4043000,               # Republic of the Congo
     "Costa Rica": 4563538,
-    "Cote d'Ivoire": 19738000,  # Côte d'Ivoire
+    "Cote d'Ivoire": 19738000,      # Côte d'Ivoire
     "Croatia": 4290612,
     "Cuba": 11241161,
     "Cyprus": 804435,
@@ -55,13 +64,13 @@ countries_and_population = {
     "Denmark": 5564219,
     "Djibouti": 889000,
     "Dominican Republic": 9378818,
-    "DPR of Korea": 24052231,   # North Korea
-    "DR of Congo": 65966000,    # Congo, Dem. Rep. of the
+    "DPR of Korea": 24052231,       # North Korea
+    "DR of Congo": 65966000,        # Congo, Dem. Rep. of the
     "East Timor": 1124000,
     "Ecuador": 14306876,
     "Egypt": 80800000,
     "El Salvador": 5744113,
-    "England": 51446000,      # from WP page, 2008 est.
+    "England": 51446000,            # from WP page, 2008 est.
     "Eritrea": 5254000,
     "Estonia": 1340122,
     "Ethiopia": 82101998,
@@ -69,7 +78,7 @@ countries_and_population = {
     "Fiji": 861000,
     "Finland": 5390730,
     "France": 65821885,
-    "FYR of Macedonia": 2057284,# Macedonia, Republic of
+    "FYR of Macedonia": 2057284,    # Macedonia, Republic of
     "Gabon": 1505000,
     "Gambia": 1728000,
     "Georgia": 4436400,
@@ -81,7 +90,7 @@ countries_and_population = {
     "Guatemala": 14361666,
     "Guernsey": 62431,
     "Guinea": 9982000,
-    "Guinea Bissau": 1515000,   # Guinea-Bissau
+    "Guinea Bissau": 1515000,       # Guinea-Bissau
     "Guyana": 784894,
     "Haiti": 10085214,
     "Honduras": 8215313,
@@ -113,7 +122,7 @@ countries_and_population = {
     "Liechtenstein": 36157,
     "Lithuania": 3221200,
     "Luxembourg": 502100,
-    "Macao": 556800,            # Macau
+    "Macao": 556800,                # Macau
     "Madagascar": 20714000,
     "Malaysia": 27565821,
     "Maldives": 317280,
@@ -122,7 +131,7 @@ countries_and_population = {
     "Marshall Islands": 54305,
     "Mauritius": 1280925,
     "Mexico": 112336538,
-    "Micronesia": 102624,       # Micronesia, Federated States of
+    "Micronesia": 102624,           # Micronesia, Federated States of
     "Moldova": 3563800,
     "Monaco": 35000,
     "Mongolia": 2819900,
@@ -159,7 +168,7 @@ countries_and_population = {
     "Saint Lucia": 166526,
     "San Marino": 31887,
     "Saudi Arabia": 27136977,
-    "Scotland": 5222100,        # from WP page, mid-2010 est.
+    "Scotland": 5222100,            # from WP page, mid-2010 est.
     "Senegal": 12434000,
     "Serbia": 7306677,
     "Seychelles": 86525,
@@ -173,20 +182,20 @@ countries_and_population = {
     "South Korea": 48988833,
     "Spain": 46125154,
     "Sri Lanka": 20653000,
-    "St Vincent Grenadines": 109000,    # Saint Vincent and the Grenadines
+    "St Vincent Grenadines": 109000,# Saint Vincent and the Grenadines
     "Sudan": 30894000,
     "Suriname": 525000,
     "Swaziland": 1186000,
     "Sweden": 9440588,
     "Switzerland": 7866500,
     "Syria": 23695000,
-    "Taiwan": 23188078,         # China, Republic of (Taiwan)
+    "Taiwan": 23188078,             # China, Republic of (Taiwan)
     "Tajikistan": 6879000,
     "Tanzania": 43187823,
     "Thailand": 67041000,
     "Togo": 6028000,
     "Tonga": 104000,
-    "Trinidad Tobago": 1317714, # Trinidad and Tobago
+    "Trinidad Tobago": 1317714,     # Trinidad and Tobago
     "Tunisia": 10549100,
     "Turkey": 73722988,
     "Turkmenistan": 5042000,
@@ -195,15 +204,15 @@ countries_and_population = {
     "Ukraine": 45706126,
     "United Arab Emirates": 8264070,
     "Uruguay": 3356584,
-    "USA": 312185000,           # United States
+    "USA": 312185000,               # United States
     "Uzbekistan": 27445000,
     "Vanuatu": 240000,
     "Venezuela": 29360000,
     "Vietnam": 87375000,
-    "Virgin Islands": 109000,   # U.S. Virgin Islands
-    "Wales": 3006400,           # from WP page, mid 2010 est.
+    "Virgin Islands": 109000,       # U.S. Virgin Islands
+    "Wales": 3006400,               # from WP page, mid 2010 est.
     "Yemen": 22492035,
-    "Yugoslavia": 8141000,      # acc. to http://www.studentsoftheworld.info/country_information.php?Pays=YUG
+    "Yugoslavia": 8141000,          # acc. to http://www.studentsoftheworld.info/country_information.php?Pays=YUG
     "Zambia": 13046508,
     "Zimbabwe": 12571000,
 }
