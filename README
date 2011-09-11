@@ -7,12 +7,23 @@ considered as a demo for jabbapylib. However, the small projects
 here are fully functional ones.
 
 Author:  Laszlo Szathmary, 2011 (jabba.laci@gmail.com)
-Website: ...
-GitHub:  ...
+Website: https://pythonadventures.wordpress.com/2011/09/06/jabbapylib/
+GitHub:  https://github.com/jabbalaci/JabbaPyLib-in-Action
 
 
 Usage:
 ------
 
 Make sure that jabbapylib is set up properly. For more
-information, please refer to the README of jabbapylib.
+information, please refer to the README of jabbapylib
+at https://github.com/jabbalaci/jabbapylib.
+
+
+Projects:
+---------
+
+project_euler_countries/countries.py
+   Website: https://pythonadventures.wordpress.com/2011/09/10/new-statistics-page-for-project-euler-sort-countries-by-strength/
+   Analyze the statistics page of Project Euler (http://projecteuler.net/index.php?section=statistics)
+   and make a new stat. page where the countries are sorted by strength.
+   Usage: ./countries.py    (output is written to stat.html)
