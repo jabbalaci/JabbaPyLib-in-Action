@@ -10,13 +10,11 @@ Usage:
 ======
 First visit the stat. page with Firefox. Since you will have to log in to the PE
 site for that, the necessary cookies will be stored in Firefox's cookies.sqlite file.
-This script will have to use those cookies in order to fetch the stat. page. The
-output will be written to 'stat.html' by default.
+This script will have to use those cookies in order to fetch the stat. page. 
 
-TODO: the current version shows the absolute strength of the countries. Add
-an option to calculate the relative strength too, where the population of
-a given country is taken into account. The population could be gathered from
-Wikipedia for instance and stored in a file.
+./countries.py [-a | -r]    # absolute or relative strength
+
+The output will be written to 'stat.html' by default.
 """
 
 URL = 'http://projecteuler.net/index.php?section=statistics'
@@ -31,13 +29,17 @@ import sys
 import operator
 import webbrowser
 
+from population.population import countries_and_population
+
 import jabbapylib.web.web as web
 from BeautifulSoup import BeautifulSoup
+from optparse import OptionParser
 
 
 class Countries:
-    def __init__(self):
+    def __init__(self, options):
         self.countries = []
+        self.options = options
         
     def add(self, text):
         text = text.replace('&nbsp;', '')
@@ -49,24 +51,36 @@ class Countries:
             self.countries.append(Country(name, cnt))
             
     def sort(self):
-        self.countries.sort(key=operator.attrgetter("cnt"), reverse=True)
+        if self.options.absolute:
+            self.countries.sort(key=operator.attrgetter("cnt"), reverse=True)
+        else:   # if self.options.relative
+            self.countries.sort(key=operator.methodcaller("relative_participation"), reverse=True)
+        
+    def debug(self):
+        for c in self.countries:
+            print >>sys.stderr, c
       
   
 class Country:
     def __init__(self, name, cnt):
         self.name = name
         self.cnt = cnt
+        self.population = countries_and_population[name]
         
     def __str__(self):
-        return "{0} {1}".format(self.name, self.cnt)
+        return "name={0}, cnt={1}, population={2}, rel_part={3:.4f}".format(self.name, self.cnt, self.population, self.relative_participation())
     
     def get_gif(self):
         return self.name.replace(' ', '_')
+    
+    def relative_participation(self):
+        return float(self.cnt) / float(self.population) * 100000
 
 
 class HtmlWriter:
     def __init__(self, countries):
         self.countries = countries
+        self.options = countries.options
         
     def print_file(self, html_file):
         f = open(html_file, 'r')
@@ -84,18 +98,33 @@ class HtmlWriter:
         pos = 0
         for country in self.countries.countries:
             pos += 1
-            print """<li style="float:left;margin-right:5px;width:16em;height:1.5em;">
+            if self.options.absolute:
+                print """<li style="float:left;margin-right:5px;width:16em;height:1.5em;">
 <div style="font-size:82%;">
-<a href="index.php?section=scores&amp;country={country}" style="text-decoration:none;"><img src="http://projecteuler.net/images/flags/{country_gif}.gif" alt="{country}" style="border:1px solid #bbb;vertical-align:middle;" />
+<a href="http://projecteuler.net/index.php?section=scores&amp;country={country}" style="text-decoration:none;"><img src="http://projecteuler.net/images/flags/{country_gif}.gif" alt="{country}" style="border:1px solid #bbb;vertical-align:middle;" />
 &nbsp;[{pos}] {country} ({cnt})</a></div>
 </li>""".format(pos=pos, country=country.name, country_gif=country.get_gif(), cnt=country.cnt)
+            else:   # if self.options.relative:
+                print """<li style="float:left;margin-right:5px;width:16em;height:1.5em;">
+<div style="font-size:75%;">
+<a href="http://projecteuler.net/index.php?section=scores&amp;country={country}" style="text-decoration:none;"><img src="http://projecteuler.net/images/flags/{country_gif}.gif" alt="{country}" style="border:1px solid #bbb;vertical-align:middle;" />
+&nbsp;[{pos}] {country} ({rel_part:.3f})</a></div>
+</li>""".format(pos=pos, country=country.name, country_gif=country.get_gif(), rel_part=country.relative_participation())
+
+    def print_abs_or_rel(self):
+        if self.options.absolute:
+            print "<h3>The countries are ordered by absolute strength.</h3><br>"
+        else:   # if self.options.relative:
+            print "<h3>The countries are ordered by relative strength.</h3>"
+            print """<p>The relative strength is calculated the following way: participants / population * 100000. That is, the relative
+strength shows how many people participate in Project Euler out of 100,000 people.</p><br>"""
         
     def start(self):
         old_stdout = sys.stdout
         sys.stdout = open(OUTPUT, 'w')
         
         self.print_file(HEADER1)
-        print "<h3>The countries are ordered by absolute strength.</h3><br>"
+        self.print_abs_or_rel()
         self.print_file(HEADER2)
         self.print_body()
         self.print_file(FOOTER)
@@ -103,8 +132,37 @@ class HtmlWriter:
         sys.stdout = old_stdout
 
 
+def proccess_arguments():
+    parser = OptionParser(usage='%prog [options]')
+    
+    #[options]
+    parser.add_option('-a',
+                      '--absolute',
+                      action='store_true',
+                      default=False,
+                      help='Order countries by absolute strength.')
+    parser.add_option('-r',
+                      '--relative',
+                      action='store_true',
+                      default=False,
+                      help='Order countries by relative strength.')
+
+    options, arguments = parser.parse_args()
+    if not options.absolute and not options.relative:
+        print >>sys.stderr, "{0}: choose an option (absolute or relative). Help: -h.".format(sys.argv[0])
+        sys.exit(1)
+        
+    if options.absolute and options.relative:
+        print >>sys.stderr, "{0}: choose just one option. Help: -h.".format(sys.argv[0])
+        sys.exit(1)
+        
+    # else
+    return options
+
 def main():
-    countries = Countries()
+    options = proccess_arguments()
+    
+    countries = Countries(options)
     
     text = web.get_page_with_cookies_using_cookiejar(URL)
     soup = BeautifulSoup(text)
@@ -113,6 +171,8 @@ def main():
             countries.add(tag.text)
             
     countries.sort()
+    
+    #countries.debug()
     
     html = HtmlWriter(countries)
     html.start()

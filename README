@@ -26,4 +26,4 @@ project_euler_countries/countries.py
    Website: http://wp.me/p154LQ-dx
    Analyze the statistics page of Project Euler (http://projecteuler.net/index.php?section=statistics)
    and make a new stat. page where the countries are sorted by strength.
-   Usage: ./countries.py    (output is written to stat.html)
+   Usage: ./countries.py [-a | -r]    # absolute or relative strength; output is written to stat.html
