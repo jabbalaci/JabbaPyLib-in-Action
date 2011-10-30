@@ -20,8 +20,18 @@ def extract_image_urls(url):
     
     text = get_page(url, user_agent=True, referer=True)
     soup = bs.to_soup(text)
-    for pic in soup.findCssSelect('div.pic'):
-        li.append(pic.find('a')['href'])
+    
+#    this version worked for a day:
+#    for pic in soup.findCssSelect('div.pic'):
+#        a = pic.find('a', href=True)
+#        if a:
+#            li.append(a['href'])
+
+#   here is a new version, updated to the changes
+    for div in soup.findCssSelect('div.pic'):
+        img = div.find('img')
+        if img and img.has_key('src'):
+            li.append(img['src'].replace('/small/', '/large/'))
         
     for div in soup.findCssSelect('html body form#aspnetForm div#main div'):
         result = re.search(r'URL: (http://.*)View full images', div.text)
