@@ -5,4 +5,4 @@ BASE_DIR = '/trash/fuskator'
 
 # if it's true, the script will wait some random seconds between
 # downloading two images
-SLEEP_BETWEEN_IMAGES = False
+SLEEP_BETWEEN_IMAGES = True

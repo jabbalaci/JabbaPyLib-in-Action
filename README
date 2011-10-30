@@ -24,6 +24,7 @@ Projects:
 
 fuskator.com/01_download_galleries_on_first_page.py
    Download galleries from fuskator.com's main page.
+   By default, it waits some seconds between downloading two images. Be nice with the webserver ;)
 
 project_euler_countries/countries.py
    Website: http://wp.me/p154LQ-dx

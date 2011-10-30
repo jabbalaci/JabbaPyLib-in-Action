@@ -52,7 +52,7 @@ fuskator: {fuskator}
             img.download()
             sys.stdout.write('.')
             if cfg.SLEEP_BETWEEN_IMAGES:
-                scraper.sleep()
+                scraper.sleep(3,3)
         print
     
 
