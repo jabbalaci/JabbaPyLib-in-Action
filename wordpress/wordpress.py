@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 
-from jabbapylib.web.web import get_page
-from jabbapylib.web.scraper import bs
-from jabbapylib.number.number import number_to_pretty_string
-from jabbapylib.console import color
+from jabbapylib.web.web import get_page #@UnresolvedImport
+from jabbapylib.web.scraper import bs #@UnresolvedImport
+from jabbapylib.console import color #@UnresolvedImport
+
+# pretty print numbers
+import locale
+locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 blogs = ['pythonadventures', 'ubuntuincident']
 
@@ -21,13 +24,13 @@ def visit(blog, dic):
 def print_result(dic):
     summa = 0
     for key in sorted(dic.keys()):
-        print '{blog:40}{hits:>10}'.format(blog=key, hits=number_to_pretty_string(dic[key]))
+        print '{blog:40}{hits:>10n}'.format(blog=key, hits=dic[key])
         summa += dic[key]
     #
     print '-' * (40+10)
     print '{total} number of visits: {hits}!'.format(
         total=color.bold('Total'),                                          
-        hits=color.bold(number_to_pretty_string(summa))
+        hits=color.bold('{0:n}'.format(summa))
     )
 
 
