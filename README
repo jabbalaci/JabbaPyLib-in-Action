@@ -22,6 +22,9 @@ at https://github.com/jabbalaci/jabbapylib.
 Projects:
 ---------
 
+wordpress/wordpress.py
+   Prints a summary about the number of visits on your wordpress blog.
+
 fuskator.com/01_download_galleries_on_first_page.py
    Download galleries from fuskator.com's main page.
    By default, it waits some seconds between downloading two images. Be nice with the webserver ;)
